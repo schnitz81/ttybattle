@@ -18,33 +18,33 @@ WINDOW *cpu_menu_win;  // Make cpu win global.
 
 char *main_choices[] = {
 	"Falcon Punch",
-    "Inventory",
-    "Shop",
-    "Quit",
-    (char *)NULL
+	"Inventory",
+	"Shop",
+	"Quit",
+	(char *)NULL
 };
 
 char *inventory_choices[] = {
 	"Lottery ticket",
 	"Hand grenade",
-    "Rocket launcher",
-    "Cruise missile",
-    "EMP bomb",
-    "H-bomb",
-    "Exit",
-    (char *)NULL
+	"Rocket launcher",
+	"Cruise missile",
+	"EMP bomb",
+	"H-bomb",
+	"Exit",
+	(char *)NULL
 };
 
 
 char *shop_choices[] = {
 	"Lottery ticket",
 	"Hand grenade",
-    "Rocket launcher",
-    "Cruise missile",
-    "EMP bomb",
-    "H-bomb",
-    "Exit",
-    (char *)NULL
+	"Rocket launcher",
+	"Cruise missile",
+	"EMP bomb",
+	"H-bomb",
+	"Exit",
+	(char *)NULL
 };
 
 
@@ -70,9 +70,9 @@ void cpuwindow()
 	print_cpu_titlebar();
 	
 	// Print a border around the cpu window and print a title 
-    box(cpu_menu_win, 0, 0);
+	box(cpu_menu_win, 0, 0);
     
-    wrefresh(cpu_menu_win);
+	wrefresh(cpu_menu_win);
 }
 
 
@@ -82,12 +82,12 @@ enum mainchoice playermainmenu()
 	int c;
 	MENU *main_menu;
     
-    int n_choices, i;
+	int n_choices, i;
     
 	// Create menu items
-    n_choices = ARRAY_SIZE(main_choices);
-    main_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
-    for(i = 0; i < n_choices; ++i)
+	n_choices = ARRAY_SIZE(main_choices);
+	main_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
+	for(i = 0; i < n_choices; ++i)
 		main_items[i] = new_item(main_choices[i], main_choices[i]);
 	
 	// Create menu
@@ -98,23 +98,23 @@ enum mainchoice playermainmenu()
 	
 	// Create player window
 	player_menu_win = newwin(12, 50, 13, 4);
-    keypad(player_menu_win, TRUE);
+	keypad(player_menu_win, TRUE);
 
 	// Set main window and menu win
-    set_menu_win(main_menu, player_menu_win);
-    set_menu_sub(main_menu, derwin(player_menu_win, 7, 48, 5, 1));
+	set_menu_win(main_menu, player_menu_win);
+	set_menu_sub(main_menu, derwin(player_menu_win, 7, 48, 5, 1));
 	set_menu_format(main_menu, 25, 25);
 	set_menu_mark(main_menu, " ");
 	
 	// Print a border around the player window
-    box(player_menu_win, 0, 0);
+	box(player_menu_win, 0, 0);
       
 	// Print dosh, title and energy.
-    print_player_titlebar(player_menu_win);
+	print_player_titlebar(player_menu_win);
     
-    refresh();
+	refresh();
     
-    // Post the menu
+	// Post the menu
 	post_menu(main_menu);
 	wrefresh(player_menu_win);
 	
@@ -138,16 +138,16 @@ enum mainchoice playermainmenu()
 			case 10: // Enter
 				main_menu_choice = item_index(current_item(main_menu));
 				break;
-			}
-            wrefresh(player_menu_win);
-            if(main_menu_choice != 99) // Exit menu instantly when choice is made.
-				break;
+		}
+        wrefresh(player_menu_win);
+        if(main_menu_choice != 99) // Exit menu instantly when choice is made.
+		break;
 	}	
 	// Unpost and free memory
-    unpost_menu(main_menu);
-    free_menu(main_menu);
-    for(i = 0; i < n_choices; ++i)
-        free_item(main_items[i]);
+	unpost_menu(main_menu);
+	free_menu(main_menu);
+	for(i = 0; i < n_choices; ++i)
+        	free_item(main_items[i]);
 	return main_menu_choice;
 }
 
@@ -157,13 +157,13 @@ enum mainchoice playerinventorymenu()
 	ITEM **inventory_items;
 	int c;
 	MENU *inventory_menu;
-    int n_choices, i;
+	int n_choices, i;
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
     
 	// Create menu items
-    n_choices = ARRAY_SIZE(inventory_choices);
-    inventory_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
-    for(i = 0; i < n_choices; ++i){
+	n_choices = ARRAY_SIZE(inventory_choices);
+	inventory_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
+	for(i = 0; i < n_choices; ++i){
 		inventory_items[i] = new_item(inventory_choices[i], inventory_choices[i] );
 	}
 	
@@ -175,23 +175,23 @@ enum mainchoice playerinventorymenu()
 	
 	// Create player window
 	player_menu_win = newwin(12, 50, 13, 4);
-    keypad(player_menu_win, TRUE);
+	keypad(player_menu_win, TRUE);
 
 	// Set main window and menu win
-    set_menu_win(inventory_menu, player_menu_win);
-    set_menu_sub(inventory_menu, derwin(player_menu_win, 7, 48, 3, 1));
+	set_menu_win(inventory_menu, player_menu_win);
+	set_menu_sub(inventory_menu, derwin(player_menu_win, 7, 48, 3, 1));
 	set_menu_format(inventory_menu, 25, 1);
 	set_menu_mark(inventory_menu, " ");
 	
 	// Print a border around the player window
-    box(player_menu_win, 0, 0);
+	box(player_menu_win, 0, 0);
     
-    // Print dosh, title and energy.
-    print_player_titlebar(player_menu_win);
+	// Print dosh, title and energy.
+	print_player_titlebar(player_menu_win);
     
-    refresh();
+	refresh();
     
-    // Post the menu
+	// Post the menu
 	post_menu(inventory_menu);
 	print_player_stocks();
 	mvwprintw(player_menu_win,5, 38, "INVENTORY");
@@ -200,8 +200,8 @@ enum mainchoice playerinventorymenu()
 	int inventory_menu_choice = 99;
 	
 	while((c = wgetch(player_menu_win)) != 27 && inventory_menu_choice == 99)
-	{    switch(c)
-	     {	
+	{    
+		switch(c){	
 			case KEY_DOWN:
 				menu_driver(inventory_menu, REQ_DOWN_ITEM);
 			 	break;
@@ -228,13 +228,13 @@ enum mainchoice playerinventorymenu()
 		}
         wrefresh(player_menu_win);
         if(inventory_menu_choice != 99) // Exit menu instantly when choice is made.
-			break;
+		break;
 	}	
 	// Unpost and free memory
-    unpost_menu(inventory_menu);
-    free_menu(inventory_menu);
-    for(i = 0; i < n_choices; ++i)
-        free_item(inventory_items[i]);
+	unpost_menu(inventory_menu);
+	free_menu(inventory_menu);
+	for(i = 0; i < n_choices; ++i)
+        	free_item(inventory_items[i]);
 	return inventory_menu_choice;  // Return value to gameengine.
 }
 
@@ -245,13 +245,13 @@ void playershopmenu()
 	ITEM **shop_items;
 	int c;
 	MENU *shop_menu;
-    int n_choices, i;
+	int n_choices, i;
     
 	// Create menu items
-    n_choices = ARRAY_SIZE(shop_choices);
-    shop_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
+	n_choices = ARRAY_SIZE(shop_choices);
+	shop_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
    
-    for(i = 0; i < n_choices; ++i)
+	for(i = 0; i < n_choices; ++i)
 		shop_items[i] = new_item(shop_choices[i], shop_choices[i] );
 		
 	// Create menu
@@ -262,23 +262,23 @@ void playershopmenu()
 	
 	// Create player window
 	player_menu_win = newwin(12, 50, 13, 4);
-    keypad(player_menu_win, TRUE);
+	keypad(player_menu_win, TRUE);
 
 	// Set main window and menu win
-    set_menu_win(shop_menu, player_menu_win);
-    set_menu_sub(shop_menu, derwin(player_menu_win, 7, 48, 3, 1));
+	set_menu_win(shop_menu, player_menu_win);
+	set_menu_sub(shop_menu, derwin(player_menu_win, 7, 48, 3, 1));
 	set_menu_format(shop_menu, 25, 1);
 	set_menu_mark(shop_menu, " ");
 	
 	// Print a border around the player window
-    box(player_menu_win, 0, 0);
+	box(player_menu_win, 0, 0);
 
 	// Print dosh, title and energy.
-    print_player_titlebar(player_menu_win);
+	print_player_titlebar(player_menu_win);
     
-    refresh();
+	refresh();
     
-    // Post the menu
+	// Post the menu
 	post_menu(shop_menu);
 	print_player_prices();
 	mvwprintw(player_menu_win,5, 41, "SHOP");
@@ -330,15 +330,15 @@ void playershopmenu()
 				set_menu_fore(shop_menu, COLOR_PAIR(0) | A_REVERSE);
 				break;
 			}
-            wrefresh(player_menu_win);
-            if(Shopchoice == EXIT) // Exit menu instantly when choice is made.
-				break;
+		wrefresh(player_menu_win);
+		if(Shopchoice == EXIT) // Exit menu instantly when choice is made.
+			break;
 	}	
 	// Unpost and free memory
-    unpost_menu(shop_menu);
-    free_menu(shop_menu);
-    for(i = 0; i < n_choices; ++i)
-        free_item(shop_items[i]);
+	unpost_menu(shop_menu);
+	free_menu(shop_menu);
+	for(i = 0; i < n_choices; ++i)
+		free_item(shop_items[i]);
 }
 
 void textevent(char textToPrint[])  // General routine for messagebar printing.
@@ -357,11 +357,11 @@ void textevent(char textToPrint[])  // General routine for messagebar printing.
 
 void print_player_titlebar()
 {
-    mvwprintw(player_menu_win,1, 2, "$:%d",playerstats.dosh);
-    mvwchgat(player_menu_win,1,2,7,A_BOLD,3,NULL);
-    mvwprintw(player_menu_win,1, 20, "Player");
-    mvwprintw(player_menu_win,1, 37, "Energy:%d",playerstats.energy);
-    mvwchgat(player_menu_win,1,37,11,A_BOLD,4,NULL);
+	mvwprintw(player_menu_win,1, 2, "$:%d",playerstats.dosh);
+	mvwchgat(player_menu_win,1,2,7,A_BOLD,3,NULL);
+	mvwprintw(player_menu_win,1, 20, "Player");
+	mvwprintw(player_menu_win,1, 37, "Energy:%d",playerstats.energy);
+	mvwchgat(player_menu_win,1,37,11,A_BOLD,4,NULL);
 }
 
 void print_player_stocks()
@@ -386,11 +386,11 @@ void print_player_prices()
 
 void print_cpu_titlebar()
 {
-    mvwprintw(cpu_menu_win,10, 2, "$:%d",cpustats.dosh);
-    mvwchgat(cpu_menu_win,10,2,7,A_BOLD,3,NULL);
-    mvwprintw(cpu_menu_win,10, 21, "CPU");
-    mvwprintw(cpu_menu_win,10, 37, "Energy:%d",cpustats.energy);
-    mvwchgat(cpu_menu_win,10,37,11,A_BOLD,4,NULL);
+	mvwprintw(cpu_menu_win,10, 2, "$:%d",cpustats.dosh);
+	mvwchgat(cpu_menu_win,10,2,7,A_BOLD,3,NULL);
+	mvwprintw(cpu_menu_win,10, 21, "CPU");
+	mvwprintw(cpu_menu_win,10, 37, "Energy:%d",cpustats.energy);
+	mvwchgat(cpu_menu_win,10,37,11,A_BOLD,4,NULL);
 }
 
 void print_cpu_stocks()
