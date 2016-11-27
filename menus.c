@@ -139,9 +139,9 @@ enum mainchoice playermainmenu()
 				main_menu_choice = item_index(current_item(main_menu));
 				break;
 		}
-        wrefresh(player_menu_win);
-        if(main_menu_choice != 99) // Exit menu instantly when choice is made.
-		break;
+        	wrefresh(player_menu_win);
+        	if(main_menu_choice != 99) // Exit menu instantly when choice is made.
+			break;
 	}	
 	// Unpost and free memory
 	unpost_menu(main_menu);
