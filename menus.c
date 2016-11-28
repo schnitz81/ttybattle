@@ -9,12 +9,10 @@
 #include "stats.h"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
-#define CTRLD 4
-
+//#define CTRLD 4
 
 WINDOW *player_menu_win;  // Make player win global.
 WINDOW *cpu_menu_win;  // Make cpu win global.
-
 
 char *main_choices[] = {
 	"Falcon Punch",
@@ -56,9 +54,7 @@ void checkTerminalSize()
 		endwin();
 		printf("\nTerminal window too small! Please enlarge.\n\n");
 		exit(1);
-	}
-		
-		
+	}		
 }
 
 
@@ -120,9 +116,8 @@ enum mainchoice playermainmenu()
 	
 	int main_menu_choice = 99;
 	
-	while((c = wgetch(player_menu_win)) != 27 /*&& main_menu_choice == 99*/)
-	{       switch(c)
-	        {	
+	while((c = wgetch(player_menu_win)) != 27){       
+		switch(c){	
 			case KEY_DOWN:
 				menu_driver(main_menu, REQ_DOWN_ITEM);
 				break;
@@ -135,12 +130,12 @@ enum mainchoice playermainmenu()
 			case KEY_RIGHT:
 				menu_driver(main_menu, REQ_RIGHT_ITEM);
 				break;
-			case 10: // Enter
+			case 10:  // Enter
 				main_menu_choice = item_index(current_item(main_menu));
 				break;
 		}
         	wrefresh(player_menu_win);
-        	if(main_menu_choice != 99) // Exit menu instantly when choice is made.
+        	if(main_menu_choice != 99)  // Exit menu instantly when choice is made.
 			break;
 	}	
 	// Unpost and free memory
@@ -199,8 +194,7 @@ enum mainchoice playerinventorymenu()
 	
 	int inventory_menu_choice = 99;
 	
-	while((c = wgetch(player_menu_win)) != 27 && inventory_menu_choice == 99)
-	{    
+	while((c = wgetch(player_menu_win)) != 27 && inventory_menu_choice == 99){    
 		switch(c){	
 			case KEY_DOWN:
 				menu_driver(inventory_menu, REQ_DOWN_ITEM);
@@ -214,7 +208,7 @@ enum mainchoice playerinventorymenu()
 			case KEY_RIGHT:
 				menu_driver(inventory_menu, REQ_RIGHT_ITEM);
 				break;
-			case 10: // Enter
+			case 10:  // Enter
 				inventory_menu_choice = item_index(current_item(inventory_menu));
 				for(i=0;i<=5;i++){  // Menu cursor blink at choice
 					set_menu_fore(inventory_menu, COLOR_PAIR(1) | A_REVERSE);
@@ -227,7 +221,7 @@ enum mainchoice playerinventorymenu()
 				break;
 		}
         wrefresh(player_menu_win);
-        if(inventory_menu_choice != 99) // Exit menu instantly when choice is made.
+        if(inventory_menu_choice != 99)  // Exit menu instantly when choice is made.
 		break;
 	}	
 	// Unpost and free memory
@@ -284,9 +278,8 @@ void playershopmenu()
 	mvwprintw(player_menu_win,5, 41, "SHOP");
 	wrefresh(player_menu_win);
 	
-	while((c = wgetch(player_menu_win)) != 27 && Shopchoice != EXIT )
-	{       switch(c)
-	        {	
+	while((c = wgetch(player_menu_win)) != 27 && Shopchoice != EXIT){       
+		switch(c){	
 			case KEY_DOWN:
 				menu_driver(shop_menu, REQ_DOWN_ITEM);
 				break;
@@ -299,7 +292,7 @@ void playershopmenu()
 			case KEY_RIGHT:
 				menu_driver(shop_menu, REQ_RIGHT_ITEM);
 				break;
-			case 10: // Enter
+			case 10:  // Enter
 				Shopchoice = item_index(current_item(shop_menu));
 				
 				switch(Shopchoice){  
@@ -324,14 +317,13 @@ void playershopmenu()
 					case EXIT:
 						break;
 				}
-				
 				wrefresh(player_menu_win);
 				usleep(500000);
 				set_menu_fore(shop_menu, COLOR_PAIR(0) | A_REVERSE);
 				break;
 			}
 		wrefresh(player_menu_win);
-		if(Shopchoice == EXIT) // Exit menu instantly when choice is made.
+		if(Shopchoice == EXIT)  // Exit menu instantly when choice is made.
 			break;
 	}	
 	// Unpost and free memory
