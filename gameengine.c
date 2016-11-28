@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <curses.h>
 #include <menu.h>
 #include <time.h>
@@ -13,7 +12,7 @@
 
 void mainloop()
 {
-    init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_RED, COLOR_BLACK);
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(4, COLOR_CYAN, COLOR_BLACK);
@@ -23,10 +22,12 @@ void mainloop()
 	enum mainchoice Mainchoice;
 	enum stuff Inventorychoice;
 	int playerAttacked,cpuAttacked;
-
-	srand(time(NULL)); // Randomness.
-
-	initialize_stats(); // Set initial values for both player and CPU stats.
+	
+	// Randomness.
+	srand(time(NULL)); 
+	
+	// Set initial values for both player and CPU stats.
+	initialize_stats(); 
 
 	//Generate CPU-window
 	cpuwindow();		
