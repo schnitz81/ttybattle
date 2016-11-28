@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string.h>
-//#include <unistd.h>
 #include <curses.h>
 #include <menu.h>
 #include "menus.h"
@@ -14,7 +12,7 @@ struct stats cpustats;
 
 int main()
 {
-    // Initialization
+	// Initialization
 	initscr();
 	checkTerminalSize();
 	curs_set(0);
