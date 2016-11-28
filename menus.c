@@ -9,7 +9,6 @@
 #include "stats.h"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
-//#define CTRLD 4
 
 WINDOW *player_menu_win;  // Make player win global.
 WINDOW *cpu_menu_win;  // Make cpu win global.
@@ -33,7 +32,6 @@ char *inventory_choices[] = {
 	(char *)NULL
 };
 
-
 char *shop_choices[] = {
 	"Lottery ticket",
 	"Hand grenade",
@@ -45,7 +43,6 @@ char *shop_choices[] = {
 	(char *)NULL
 };
 
-
 void checkTerminalSize()
 {
 	int maxy,maxx;
@@ -56,7 +53,6 @@ void checkTerminalSize()
 		exit(1);
 	}		
 }
-
 
 void cpuwindow()
 {
@@ -240,6 +236,7 @@ void playershopmenu()
 	int c;
 	MENU *shop_menu;
 	int n_choices, i;
+	init_pair(1, COLOR_WHITE, COLOR_BLACK);
     
 	// Create menu items
 	n_choices = ARRAY_SIZE(shop_choices);
