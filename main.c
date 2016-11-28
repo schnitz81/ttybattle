@@ -15,21 +15,23 @@ struct stats cpustats;
 int main()
 {
     // Initialization
-    initscr();
-    checkTerminalSize();
-    curs_set(0);
+	initscr();
+	checkTerminalSize();
+	curs_set(0);
 	start_color();
-    cbreak();
-    noecho();
+	cbreak();
+	noecho();
 
 	//nodelay(stdscr, TRUE); // Don't stop by getch().
 	keypad(stdscr, TRUE);
 
-	refresh();  // Initial refresh before creating first window.
+	// Initial refresh before creating first window.
+	refresh();
 
 	// Call game engine.
 	mainloop();
 	
+	// Main loop exited - quit.
 	endwin();
 	printf("\n Player exited. Thanks for playing.\n\n");
 	return 0;
