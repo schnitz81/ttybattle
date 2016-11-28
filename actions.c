@@ -42,11 +42,9 @@ void use_ticket()
 {
 	if(playerstats.ticket < 1)
 		textevent("No lottery ticket in inventory!");
-	else{
+	else{  // Open ticket.
 		int winningAmount;
 		playerstats.ticket--;
-		/*print_player_stocks();
-		wrefresh(player_menu_win);*/
 		textevent("Player opened lottery ticket.");
 		usleep(800000);
 		
@@ -71,10 +69,8 @@ int use_handgrenade()
 		textevent("No hand grenade in inventory!");
 		return FALSE;
 	}
-	else{
+	else{  // Throw hand grenade.
 		playerstats.hand_grenade--;
-		/*print_player_stocks();
-		wrefresh(player_menu_win);*/
 		textevent("Player threw hand grenade.");
 		sleep(1);
 		if(getRndNum(6)==1){  // Player misses.
@@ -88,7 +84,7 @@ int use_handgrenade()
 				sleep(1);
 				hitpoints = getRndNum(75)+75 * 1.5;
 			}
-			else{				  // Common hit.
+			else{  // Common hit.
 				hitpoints = getRndNum(75)+75;
 				textevent("Hit!");
 				move(12,10);
@@ -113,8 +109,6 @@ int use_panzerfaust()
 	}
 	else{
 		playerstats.panzerfaust--;
-		/*print_player_stocks();
-		wrefresh(player_menu_win);*/
 		textevent("Player fired rocket launcher.");
 		sleep(1);
 		if(getRndNum(6)==1){  // Player misses.
@@ -128,7 +122,7 @@ int use_panzerfaust()
 				sleep(1);
 				hitpoints = getRndNum(150)+100 * 1.5;
 			}
-			else{				  // Common hit.
+			else{  // Common hit.
 				hitpoints = getRndNum(150)+100;
 				textevent("Hit!");
 				move(12,10);
@@ -154,8 +148,6 @@ int use_missile()
 	}
 	else{
 		playerstats.missile--;
-		/*print_player_stocks();
-		wrefresh(player_menu_win);*/
 		textevent("Player fired missile.");
 		sleep(1);
 		if(getRndNum(6)==1){  // Player misses.
@@ -169,7 +161,7 @@ int use_missile()
 				sleep(1);
 				hitpoints = getRndNum(250)+100 * 1.5;
 			}
-			else{				  // Common hit.
+			else{  // Common hit.
 				hitpoints = getRndNum(250)+100;
 				textevent("Hit!");
 				move(12,10);
@@ -194,8 +186,6 @@ int use_empbomb()
 	}
 	else{
 		playerstats.empbomb--;
-		/*print_player_stocks();
-		wrefresh(player_menu_win);*/
 		textevent("Player detonated EMP bomb.");
 		sleep(1);
 		if(getRndNum(6)==1){  // Player misses.
@@ -209,7 +199,7 @@ int use_empbomb()
 				sleep(1);
 				stuntime = 3;
 			}
-			else{				  // Common hit.
+			else{  // Common hit.
 				stuntime = 2;
 				textevent("EMP hit!");
 				move(12,14);
@@ -233,8 +223,6 @@ int use_hbomb()
 	}
 	else{
 		playerstats.hbomb--;
-		/*print_player_stocks();
-		wrefresh(player_menu_win);*/
 		textevent("Player detonated Hbomb!");
 		sleep(1);
 		if(getRndNum(6)==1){  // Player misses.
@@ -248,7 +236,7 @@ int use_hbomb()
 				sleep(1);
 				hitpoints = getRndNum(250)+400 * 1.5;
 			}
-			else{				  // Common hit.
+			else{  // Common hit.
 				hitpoints = getRndNum(250)+400;
 				textevent("Hit!");
 				move(12,10);
@@ -285,8 +273,6 @@ void buy_ticket(MENU *shop_menu)
 
 void buy_handgrenade(MENU *shop_menu)
 {
-	//init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	//init_pair(2, COLOR_RED, COLOR_BLACK);
 	if(HANDGRENADE_PRICE > playerstats.dosh){
 		set_menu_fore(shop_menu, COLOR_PAIR(2) | A_REVERSE);
 		textevent("Insufficient funds!");
@@ -303,8 +289,6 @@ void buy_handgrenade(MENU *shop_menu)
 
 void buy_panzerfaust(MENU *shop_menu)
 {
-	//init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	//init_pair(2, COLOR_RED, COLOR_BLACK);
 	if(PANZERFAUST_PRICE > playerstats.dosh){
 		set_menu_fore(shop_menu, COLOR_PAIR(2) | A_REVERSE);
 		textevent("Insufficient funds!");
@@ -321,8 +305,6 @@ void buy_panzerfaust(MENU *shop_menu)
 
 void buy_missile(MENU *shop_menu)
 {
-	//init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	//init_pair(2, COLOR_RED, COLOR_BLACK);
 	if(MISSILE_PRICE > playerstats.dosh){
 		set_menu_fore(shop_menu, COLOR_PAIR(2) | A_REVERSE);
 		textevent("Insufficient funds!");
@@ -339,8 +321,6 @@ void buy_missile(MENU *shop_menu)
 
 void buy_empbomb(MENU *shop_menu)
 {
-	//init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	//init_pair(2, COLOR_RED, COLOR_BLACK);
 	if(EMPBOMB_PRICE > playerstats.dosh){
 		set_menu_fore(shop_menu, COLOR_PAIR(2) | A_REVERSE);
 		textevent("Insufficient funds!");
@@ -357,8 +337,6 @@ void buy_empbomb(MENU *shop_menu)
 
 void buy_hbomb(MENU *shop_menu)
 {
-    //init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	//init_pair(2, COLOR_RED, COLOR_BLACK);
 	if(HBOMB_PRICE > playerstats.dosh){
 		set_menu_fore(shop_menu, COLOR_PAIR(2) | A_REVERSE);
 		textevent("Insufficient funds!");
@@ -373,7 +351,7 @@ void buy_hbomb(MENU *shop_menu)
 	}
 }
 
-void initialize_stats(/*struct inventory *inv*/)
+void initialize_stats()
 {
 	playerstats.dosh = 10000;
 	playerstats.energy = 1000;
@@ -435,8 +413,6 @@ void add_dosh(enum player Player, int nbrToAdd)
 
 void subtract_dosh(enum player Player, int nbrToSubtract)
 {
-	//init_pair(2, COLOR_RED, COLOR_BLACK);
-	//init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	int i,sleeptime;
 	if(nbrToSubtract<1100)  // Different speed depending on amount.
 		sleeptime = 3000;
