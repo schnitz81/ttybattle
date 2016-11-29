@@ -68,7 +68,6 @@ int cpu_ai()  // CPU choicemaking.
 	else 									// Last outpost - punch.
 		attackMade = cpupunch();
 	
-	
 	// Return a report on if attack was made to gameengine.
 	if(attackMade)
 		return TRUE;
@@ -95,7 +94,7 @@ int cpupunch()  // CPU falcon punch.
 			sleep(1);
 			hitpoints = getRndNum(100)+20 * 1.5;
 		}
-		else{				  // Common hit.
+		else{  // Common hit.
 			hitpoints = getRndNum(100)+20;
 			textevent("Hit!");
 			move(12,10);
@@ -153,7 +152,7 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 					sleep(1);
 					hitpoints = getRndNum(75)+75 * 1.5;
 				}
-				else{				  // Common hit.
+				else{  // Common hit.
 					hitpoints = getRndNum(75)+75;
 					textevent("Hit!");
 					move(12,10);
@@ -166,7 +165,6 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 				sleep(1);
 			}
 			return TRUE;
-			
 
 		case PANZERFAUST:
 			cpu_mainmenu(INVENTORY);
@@ -185,7 +183,7 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 					sleep(1);
 					hitpoints = getRndNum(150)+100 * 1.5;
 				}
-				else{				  // Common hit.
+				else{  // Common hit.
 					hitpoints = getRndNum(150)+100;
 					textevent("Hit!");
 					move(12,10);
@@ -198,7 +196,6 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 				sleep(1);
 			}
 			return TRUE;
-			
 			
 		case MISSILE:
 			cpu_mainmenu(INVENTORY);
@@ -217,7 +214,7 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 					sleep(1);
 					hitpoints = getRndNum(250)+100 * 1.5;
 				}
-				else{				  // Common hit.
+				else{  // Common hit.
 					hitpoints = getRndNum(250)+100;
 					textevent("Hit!");
 					move(12,10);
@@ -231,7 +228,6 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 			}
 			return TRUE;			
 		
-			
 		case EMP_BOMB:
 			cpu_mainmenu(INVENTORY);
 			cpu_inventorymenu(EMP_BOMB);
@@ -249,7 +245,7 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 					sleep(1);
 					stuntime = 3;
 				}
-				else{				  // Common hit.
+				else{  // Common hit.
 					textevent("EMP hit!");
 					move(12,14);
 					stuntime = 2;
@@ -262,8 +258,6 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 				sleep(1);
 			}
 			return TRUE;
-		
-			
 			
 		case HBOMB:
 			cpu_mainmenu(INVENTORY);
@@ -379,7 +373,6 @@ void cpu_mainmenu(enum mainchoice Mainchoice)  // CPU choose selected main categ
 }
 
 
-
 void cpu_inventorymenu(enum stuff InventoryChoice)  // CPU use selected inventory item.
 {
 	// Print CPU inventory items.
@@ -472,5 +465,4 @@ int i,j;
 	}
 	wrefresh(cpu_menu_win);
 }
-
 
