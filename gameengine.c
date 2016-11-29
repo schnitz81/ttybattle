@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <curses.h>
 #include <menu.h>
+#include <unistd.h>
 #include <time.h>
 #include "gameengine.h"
 #include "menus.h"
@@ -45,7 +46,7 @@ void mainloop()
 		textevent("Player turn.");
 		
 		// Handling of player stunned behavior.
-		if(playerstats.stunned>0){ 	// Check if stunned.
+		if(playerstats.stunned>0){  // Check if stunned.
 			textevent("Player is stunned.");
 			playerstats.stunned--;
 			sleep(1);
@@ -121,7 +122,7 @@ void mainloop()
 } 
 
 
-int getRndNum(int nmbOfTurnouts) // Function to return a random number.
+int getRndNum(int nmbOfTurnouts)  // Function to return a random number.
 {       
 	int rand_nbr = (rand()%nmbOfTurnouts+1); 
 	return rand_nbr;
