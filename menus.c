@@ -332,13 +332,10 @@ void playershopmenu()
 
 void textevent(char textToPrint[])  // General routine for messagebar printing.
 {
-	int i,len=0;
-	FILE *p;
+	size_t i,len;
 	mvprintw(12,5,textToPrint);
-	p = fopen(DUMMYPTR, "w");
-	len = fprintf(p,"%s",textToPrint);
-	fclose(p);
-	for(i=0;i<50-len;i++)
+	len = sizeof(&textToPrint) / sizeof(textToPrint[0]);  // Get length of char array.
+	for(i=0;i<50-len;i++)  // Blank any old message.
 		printw(" ");
 	refresh();
 }

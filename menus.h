@@ -1,10 +1,7 @@
 #ifndef MENUS_H
 #define MENUS_H
 
-#define DUMMYPTR "/dev/null"
-
 enum mainchoice { FALCON_PUNCH, INVENTORY, SHOP, QUIT };
-
 
 
 extern WINDOW *player_menu_win;
