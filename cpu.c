@@ -110,7 +110,7 @@ int cpupunch()  // CPU falcon punch.
 }
 
 
-int cpuuse(enum stuff Item)  // CPU use selected item.
+int cpuuse(const enum stuff Item)  // CPU use selected item.
 {
 	int hitpoints, stuntime;
 	switch(Item){
@@ -297,7 +297,7 @@ int cpuuse(enum stuff Item)  // CPU use selected item.
 }
 
 
-void cpubuy(enum stuff Item)  // CPU buy selected item.
+void cpubuy(const enum stuff Item)  // CPU buy selected item.
 {
 	switch(Item){
 		case TICKET:
@@ -348,7 +348,7 @@ void cpubuy(enum stuff Item)  // CPU buy selected item.
 }
 
 
-void cpu_mainmenu(enum mainchoice Mainchoice)  // CPU choose selected main category.
+void cpu_mainmenu(const enum mainchoice Mainchoice)  // CPU choose selected main category.
 {
 	cpuwindow();  // Redraw CPU window.
 	mvwprintw(cpu_menu_win,5, 2,"Falcon Punch  Inventory     Shop ");
@@ -373,7 +373,7 @@ void cpu_mainmenu(enum mainchoice Mainchoice)  // CPU choose selected main categ
 }
 
 
-void cpu_inventorymenu(enum stuff InventoryChoice)  // CPU use selected inventory item.
+void cpu_inventorymenu(const enum stuff InventoryChoice)  // CPU use selected inventory item.
 {
 	// Print CPU inventory items.
 	mvwprintw(cpu_menu_win, 5, 38,"INVENTORY");
@@ -415,7 +415,7 @@ void cpu_inventorymenu(enum stuff InventoryChoice)  // CPU use selected inventor
 }
 
 
-void cpu_shopmenu(enum stuff ShopChoice)  // CPU buy selected shop item.
+void cpu_shopmenu(const enum stuff ShopChoice)  // CPU buy selected shop item.
 {
 	// Print CPU shop items.
 	mvwprintw(cpu_menu_win, 5, 41, "SHOP");

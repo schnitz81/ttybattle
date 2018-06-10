@@ -374,7 +374,7 @@ void initialize_stats()
 	cpustats.stunned = 0;
 }
 
-void add_dosh(enum player Player, int nbrToAdd)
+void add_dosh(const enum player Player, const int nbrToAdd)
 {
 	int i,sleeptime;
 	if(nbrToAdd<1100)  // Different speed depending on amount.
@@ -411,7 +411,7 @@ void add_dosh(enum player Player, int nbrToAdd)
 	}  // switch
 }
 
-void subtract_dosh(enum player Player, int nbrToSubtract)
+void subtract_dosh(const enum player Player, const int nbrToSubtract)
 {
 	int i,sleeptime;
 	if(nbrToSubtract<1100)  // Different speed depending on amount.
@@ -446,7 +446,7 @@ void subtract_dosh(enum player Player, int nbrToSubtract)
 	}  // switch
 }
 
-void subtract_energy(enum player Player, int nbrToSubtract)
+void subtract_energy(const enum player Player, const int nbrToSubtract)
 {
 	int i,sleeptime;
 	if(nbrToSubtract<75)  // Different speed depending on amount.
