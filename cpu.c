@@ -254,7 +254,7 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 				printw("Player stunned for %d turns!	 	   	        ", stuntime);
 				refresh();
 				cpu_pause();
-				playerstats.stunned = stuntime;
+				playerstats.stunned = playerstats.stunned + stuntime;
 				cpu_pause();
 			}
 			return TRUE;

@@ -208,7 +208,7 @@ int use_empbomb()
 			printw("CPU stunned for %d turns!						", stuntime);
 			refresh();
 			sleep(1);
-			cpustats.stunned = stuntime;
+			cpustats.stunned = cpustats.stunned + stuntime;
 		}
 		return TRUE;
 	}
