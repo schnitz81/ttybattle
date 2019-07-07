@@ -12,7 +12,7 @@ void cpu_mainmenu(enum mainchoice Mainchoice);
 void cpu_inventorymenu(enum stuff InventoryChoice);
 void cpu_shopmenu(enum stuff ShopChoice);
 void clear_cpuwindow();
-
+void cpu_pause();
 
 
 #endif

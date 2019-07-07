@@ -2,7 +2,7 @@
 Linux terminal game. Turn-based battle against the AI.
 
 ## How-to
-Simple menu-style control with arrow keys and Enter to make your choices throughout the game.
+Simple menu-style control with arrow keys and Enter to make your choices throughout the game. Press F to toggle CPU fast playing speed.
 
 ## License
 This file is part of ttybattle.

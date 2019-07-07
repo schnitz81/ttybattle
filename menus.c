@@ -63,7 +63,12 @@ void cpuwindow()
 	
 	// Print a border around the cpu window and print a title 
 	box(cpu_menu_win, 0, 0);
-    
+	
+	if(cpustats.fastmode){  // Print fast indicator if fast mode is set.
+		mvwprintw(cpu_menu_win,1,44,"fast");
+		mvwchgat(cpu_menu_win,1,44,4,A_BOLD,5,NULL);
+	}
+
 	wrefresh(cpu_menu_win);
 }
 
@@ -71,10 +76,9 @@ void cpuwindow()
 enum mainchoice playermainmenu()
 {
 	ITEM **main_items;
-	int c;
 	MENU *main_menu;
     
-	int n_choices, i;
+	int c, n_choices, i;
     
 	// Create menu items
 	n_choices = ARRAY_SIZE(main_choices);
@@ -129,10 +133,14 @@ enum mainchoice playermainmenu()
 			case 10:  // Enter
 				main_menu_choice = item_index(current_item(main_menu));
 				break;
+			case 70:  // F
+			case 102: // f
+				toggle_fast_mode();  // Toggle CPU fast mode.
+				break;
 		}
-        	wrefresh(player_menu_win);
-        	if(main_menu_choice != 99)  // Exit menu instantly when choice is made.
-			break;
+       	wrefresh(player_menu_win);
+       	if(main_menu_choice != 99)  // Exit menu instantly when choice is made.
+		break;
 	}	
 	// Unpost and free memory
 	unpost_menu(main_menu);
@@ -146,9 +154,8 @@ enum mainchoice playermainmenu()
 enum mainchoice playerinventorymenu()
 {
 	ITEM **inventory_items;
-	int c;
 	MENU *inventory_menu;
-	int n_choices, i;
+	int c, n_choices, i;
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
     
 	// Create menu items
@@ -233,9 +240,8 @@ void playershopmenu()
 {
 	enum stuff Shopchoice;
 	ITEM **shop_items;
-	int c;
 	MENU *shop_menu;
-	int n_choices, i;
+	int c, n_choices, i;
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
     
 	// Create menu items
@@ -330,7 +336,7 @@ void playershopmenu()
 		free_item(shop_items[i]);
 }
 
-void textevent(char textToPrint[])  // General routine for messagebar printing.
+void textevent(const char textToPrint[])  // General routine for messagebar printing.
 {
 	size_t i,len;
 	mvprintw(12,5,textToPrint);
@@ -397,4 +403,19 @@ void print_cpu_prices()
 	mvwprintw(cpu_menu_win,6, 25, "$ %d",MISSILE_PRICE);
 	mvwprintw(cpu_menu_win,7, 25, "$ %d",EMPBOMB_PRICE);
 	mvwprintw(cpu_menu_win,8, 25, "$ %d",HBOMB_PRICE);
+}
+
+void toggle_fast_mode()
+{
+	if(!cpustats.fastmode){
+		cpustats.fastmode=TRUE;
+		mvwprintw(cpu_menu_win,1,44,"fast");
+		mvwchgat(cpu_menu_win,1,44,4,A_BOLD,5,NULL);
+		wrefresh(cpu_menu_win);
+	}
+	else{
+		cpustats.fastmode=FALSE;
+		mvwprintw(cpu_menu_win,1,44,"    ");
+		wrefresh(cpu_menu_win);
+	}
 }

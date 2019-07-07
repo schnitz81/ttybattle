@@ -12,14 +12,14 @@
 int cpu_ai()  // CPU choicemaking.
 {
 	int attackMade = FALSE;
-	sleep(1);
+	cpu_pause();
 	
 	// Main CPU logic
 	
 	if(cpustats.stunned>0){ 	// Check if stunned.
 		textevent("CPU is stunned.");
 		cpustats.stunned--;
-		sleep(1);
+		cpu_pause();
 		attackMade = TRUE;  // True since being stunned is counted as an attack turn.
 	}
 	
@@ -82,29 +82,29 @@ int cpupunch()  // CPU falcon punch.
 	cpu_mainmenu(FALCON_PUNCH);
 	textevent("CPU threw a falcon punch!");
 	cpustats.hand_grenade--;
-	sleep(1);
+	cpu_pause();
 	if(getRndNum(6)==1){  // CPU misses.
 		textevent("Player blocked!");
-		sleep(1);
+		cpu_pause();
 	}
 	else{  // CPU doesn't miss.
 		if(getRndNum(6)==6){  // Chance of critical hit.
 			textevent("Critical hit!");
 			move(12,19);
-			sleep(1);
+			cpu_pause();
 			hitpoints = getRndNum(100)+20 * 1.5;
 		}
 		else{  // Common hit.
 			hitpoints = getRndNum(100)+20;
 			textevent("Hit!");
 			move(12,10);
-			sleep(1);
+			cpu_pause();
 		}
 		printw("Player lost %d energy.				         ", hitpoints);
 		refresh();
-		sleep(1);
+		cpu_pause();
 		subtract_energy(PLAYER, hitpoints);
-		sleep(1);
+		cpu_pause();
 	}
 	return TRUE;  // A punch is an attack.
 }
@@ -120,18 +120,18 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 			cpu_inventorymenu(TICKET);
 			textevent("CPU opened lottery ticket.");
 			cpustats.ticket--;
-			sleep(1);
+			cpu_pause();
 			if(getRndNum(4) == 3){
 				int winningAmount = getRndNum(MAXIMUM_WIN);
 				mvprintw(12,5,"Win! CPU won $%d                        ", winningAmount);
 				refresh();
-				sleep(1);
+				cpu_pause();
 				add_dosh(CPU, winningAmount);
 			}
 			else{
 				textevent("Blank ticket. No win.");
 				refresh();
-				sleep(1);
+				cpu_pause();
 			}
 			return FALSE;
 			
@@ -140,29 +140,29 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 			cpu_inventorymenu(HAND_GRENADE);
 			textevent("CPU threw hand grenade.");
 			cpustats.hand_grenade--;
-			sleep(1);
+			cpu_pause();
 			if(getRndNum(6)==1){  // CPU misses.
 				textevent("CPU missed!");
-				sleep(1);
+				cpu_pause();
 			}
 			else{  // CPU doesn't miss.
 				if(getRndNum(6)==6){  // Chance of critical hit.
 					textevent("Critical hit!");
 					move(12,19);
-					sleep(1);
+					cpu_pause();
 					hitpoints = getRndNum(75)+75 * 1.5;
 				}
 				else{  // Common hit.
 					hitpoints = getRndNum(75)+75;
 					textevent("Hit!");
 					move(12,10);
-					sleep(1);
+					cpu_pause();
 				}
 				printw("Player lost %d energy.				         ", hitpoints);
 				refresh();
-				sleep(1);
+				cpu_pause();
 				subtract_energy(PLAYER, hitpoints);
-				sleep(1);
+				cpu_pause();
 			}
 			return TRUE;
 
@@ -171,29 +171,29 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 			cpu_inventorymenu(PANZERFAUST);
 			textevent("CPU fired rocket launcher.");
 			cpustats.panzerfaust--;
-			sleep(1);
+			cpu_pause();
 			if(getRndNum(6)==1){  // CPU misses.
 				textevent("CPU missed!");
-				sleep(1);
+				cpu_pause();
 			}
 			else{  // CPU doesn't miss.
 				if(getRndNum(6)==6){  // Chance of critical hit.
 					textevent("Critical hit!");
 					move(12,19);
-					sleep(1);
+					cpu_pause();
 					hitpoints = getRndNum(150)+100 * 1.5;
 				}
 				else{  // Common hit.
 					hitpoints = getRndNum(150)+100;
 					textevent("Hit!");
 					move(12,10);
-					sleep(1);
+					cpu_pause();
 				}
 				printw("Player lost %d energy.				         ", hitpoints);
 				refresh();
-				sleep(1);
+				cpu_pause();
 				subtract_energy(PLAYER, hitpoints);
-				sleep(1);
+				cpu_pause();
 			}
 			return TRUE;
 			
@@ -202,29 +202,29 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 			cpu_inventorymenu(MISSILE);
 			textevent("CPU fired missile.");
 			cpustats.missile--;
-			sleep(1);
+			cpu_pause();
 			if(getRndNum(6)==1){  // CPU misses.
 				textevent("CPU missed!");
-				sleep(1);
+				cpu_pause();
 			}
 			else{  // CPU doesn't miss.
 				if(getRndNum(6)==6){  // Chance of critical hit.
 					textevent("Critical hit!");
 					move(12,19);
-					sleep(1);
+					cpu_pause();
 					hitpoints = getRndNum(250)+100 * 1.5;
 				}
 				else{  // Common hit.
 					hitpoints = getRndNum(250)+100;
 					textevent("Hit!");
 					move(12,10);
-					sleep(1);
+					cpu_pause();
 				}
 				printw("Player lost %d energy.				         ", hitpoints);
 				refresh();
-				sleep(1);
+				cpu_pause();
 				subtract_energy(PLAYER, hitpoints);
-				sleep(1);
+				cpu_pause();
 			}
 			return TRUE;			
 		
@@ -233,29 +233,29 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 			cpu_inventorymenu(EMP_BOMB);
 			textevent("CPU detonated EMP bomb.");
 			cpustats.empbomb--;
-			sleep(1);
+			cpu_pause();
 			if(getRndNum(6)==1){  // Player misses.
 				textevent("EMP had no effect!");
-				sleep(1);
+				cpu_pause();
 			}
 			else{  // CPU doesn't miss.
 				if(getRndNum(6)==6){  // Chance of critical hit.
 					textevent("EMP critical hit!");
 					move(12,23);
-					sleep(1);
+					cpu_pause();
 					stuntime = 3;
 				}
 				else{  // Common hit.
 					textevent("EMP hit!");
 					move(12,14);
 					stuntime = 2;
-					sleep(1);
+					cpu_pause();
 				}
 				printw("Player stunned for %d turns!	 	   	        ", stuntime);
 				refresh();
-				sleep(1);
+				cpu_pause();
 				playerstats.stunned = stuntime;
-				sleep(1);
+				cpu_pause();
 			}
 			return TRUE;
 			
@@ -264,29 +264,29 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 			cpu_inventorymenu(HBOMB);
 			textevent("CPU fired H-bomb.");
 			cpustats.hbomb--;
-			sleep(1);
+			cpu_pause();
 			if(getRndNum(6)==1){  // CPU misses.
 				textevent("H-bomb did not detonate properly!");
-				sleep(1);
+				cpu_pause();
 			}
 			else{  // CPU doesn't miss.
 				if(getRndNum(6)==6){  // Chance of critical hit.
 					textevent("Critical hit!");
 					move(12,19);
-					sleep(1);
+					cpu_pause();
 					hitpoints = getRndNum(250)+400 * 1.5;
 				}
 				else{				  // Common hit.
 					hitpoints = getRndNum(250)+400;
 					textevent("Hit!");
 					move(12,10);
-					sleep(1);
+					cpu_pause();
 				}
 				printw("Player lost %d energy.				         ", hitpoints);
 				refresh();
-				sleep(1);
+				cpu_pause();
 				subtract_energy(PLAYER, hitpoints);
-				sleep(1);
+				cpu_pause();
 			}
 			return TRUE;
 		
@@ -353,7 +353,7 @@ void cpu_mainmenu(const enum mainchoice Mainchoice)  // CPU choose selected main
 	cpuwindow();  // Redraw CPU window.
 	mvwprintw(cpu_menu_win,5, 2,"Falcon Punch  Inventory     Shop ");
 	wrefresh(cpu_menu_win);
-	sleep(1);
+	cpu_pause();
 	switch(Mainchoice){
 		case FALCON_PUNCH:
 			mvwchgat(cpu_menu_win,5,2,12,A_STANDOUT,0,NULL);
@@ -368,7 +368,7 @@ void cpu_mainmenu(const enum mainchoice Mainchoice)  // CPU choose selected main
 			break;
 	}
 	wrefresh(cpu_menu_win);
-	sleep(1);
+	cpu_pause();
 	clear_cpuwindow();  // Erase all CPU menu items.
 }
 
@@ -385,7 +385,7 @@ void cpu_inventorymenu(const enum stuff InventoryChoice)  // CPU use selected in
 	mvwprintw(cpu_menu_win, 8, 2,"H-bomb");
 	print_cpu_stocks();  // Print inventory tally.
 	wrefresh(cpu_menu_win);
-	sleep(1);
+	cpu_pause();
 	switch(InventoryChoice){
 		case TICKET:
 			mvwchgat(cpu_menu_win,3,2,14,A_STANDOUT,0,NULL);
@@ -409,7 +409,7 @@ void cpu_inventorymenu(const enum stuff InventoryChoice)  // CPU use selected in
 			break;
 	}
 	wrefresh(cpu_menu_win);
-	sleep(1);
+	cpu_pause();
 	clear_cpuwindow();  // Erase all CPU menu items.
 	
 }
@@ -419,15 +419,15 @@ void cpu_shopmenu(const enum stuff ShopChoice)  // CPU buy selected shop item.
 {
 	// Print CPU shop items.
 	mvwprintw(cpu_menu_win, 5, 41, "SHOP");
-	mvwprintw(cpu_menu_win, 3, 2,"Lottery ticket");
-	mvwprintw(cpu_menu_win, 4, 2,"Hand grenade");
-	mvwprintw(cpu_menu_win, 5, 2,"Rocket launcher");
-	mvwprintw(cpu_menu_win, 6, 2,"Cruise missile");
-	mvwprintw(cpu_menu_win, 7, 2,"EMP bomb");
-	mvwprintw(cpu_menu_win, 8, 2,"H-bomb");
+	mvwprintw(cpu_menu_win, 3, 2, "Lottery ticket");
+	mvwprintw(cpu_menu_win, 4, 2, "Hand grenade");
+	mvwprintw(cpu_menu_win, 5, 2, "Rocket launcher");
+	mvwprintw(cpu_menu_win, 6, 2, "Cruise missile");
+	mvwprintw(cpu_menu_win, 7, 2, "EMP bomb");
+	mvwprintw(cpu_menu_win, 8, 2, "H-bomb");
 	print_cpu_prices();  // List prices.
 	wrefresh(cpu_menu_win);
-	sleep(1);
+	cpu_pause();
 	switch(ShopChoice){  // Highlight choice.
 		case TICKET:
 			mvwchgat(cpu_menu_win,3,2,14,A_STANDOUT,0,NULL);  
@@ -451,18 +451,30 @@ void cpu_shopmenu(const enum stuff ShopChoice)  // CPU buy selected shop item.
 			break;
 	}
 	wrefresh(cpu_menu_win);
-	sleep(1);
+	cpu_pause();
 	clear_cpuwindow();  // Erase all CPU menu items.
 }
 
 
-void clear_cpuwindow()  // Erase everyting in CPU window except menu bar.
+void clear_cpuwindow()  // Erase everyting in CPU window except menu bar and fast indicator.
 {
 int i,j;
 	for(i=1;i<=48;i++){
 		for(j=1;j<=9;j++)
 			mvwprintw(cpu_menu_win,j,i," ");  // Erase character.
 	}
+	if(cpustats.fastmode){  // Print fast indicator if fast mode is set.
+		mvwprintw(cpu_menu_win,1,44,"fast");
+		mvwchgat(cpu_menu_win,1,44,4,A_BOLD,5,NULL);
+	}
 	wrefresh(cpu_menu_win);
+}
+
+void cpu_pause()  // CPU play pause.
+{
+	if(cpustats.fastmode)
+		usleep(240000);
+	else
+		sleep(1);
 }
 

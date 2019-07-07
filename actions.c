@@ -362,6 +362,7 @@ void initialize_stats()
 	playerstats.empbomb = 0;
 	playerstats.hbomb = 0;
 	playerstats.stunned = 0;
+	playerstats.fastmode = 0;
 	
 	cpustats.dosh = 10000;
 	cpustats.energy = 1000;
@@ -372,6 +373,7 @@ void initialize_stats()
 	cpustats.empbomb = 0;
 	cpustats.hbomb = 0;
 	cpustats.stunned = 0;
+	cpustats.fastmode = 0;
 }
 
 void add_dosh(const enum player Player, const int nbrToAdd)

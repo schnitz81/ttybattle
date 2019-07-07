@@ -11,6 +11,7 @@ struct stats{
 	int empbomb;
 	int hbomb;
 	int stunned;
+	int fastmode;
 };
 
 /* Make inventories global. */

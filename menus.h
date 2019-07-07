@@ -13,13 +13,14 @@ void cpuwindow();
 enum mainchoice playermainmenu();
 enum mainchoice playerinventorymenu();
 void playershopmenu();
-void textevent(char textToPrint[]);
+void textevent(const char textToPrint[]);
 void print_player_titlebar();
 void print_player_stocks();
 void print_player_prices();
 void print_cpu_titlebar();
 void print_cpu_stocks();
 void print_cpu_prices();
+void toggle_fast_mode();
 
 #endif
 
