@@ -18,33 +18,33 @@ void mainloop()
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(4, COLOR_CYAN, COLOR_BLACK);
 	init_pair(5, COLOR_GREEN, COLOR_BLACK);
-	
+
 	//Create player stats
 	enum mainchoice Mainchoice;
 	enum stuff Inventorychoice;
 	int playerAttacked,cpuAttacked;
-	
+
 	// Randomness.
-	srand(time(NULL)); 
-	
+	srand(time(NULL));
+
 	// Set initial values for both player and CPU stats.
-	initialize_stats(); 
+	initialize_stats();
 
 	//Generate CPU-window
-	cpuwindow();		
-	
+	cpuwindow();
+
 	while(Mainchoice != QUIT){
-		
+
 		// *** Player turn ***
-		
-		playerAttacked = FALSE; 
-		
+
+		playerAttacked = FALSE;
+
 		// Player game over
 		if(playerstats.energy < 1)
 			gameover(PLAYER);
-		
+
 		textevent("Player turn.");
-		
+
 		// Handling of player stunned behavior.
 		if(playerstats.stunned>0){  // Check if stunned.
 			textevent("Player is stunned.");
@@ -52,23 +52,23 @@ void mainloop()
 			sleep(1);
 			playerAttacked = TRUE;  // True since being stunned is counted as an attack turn.
 		}
-			
+
 		// Player turn until weapon is used.
 		while(!playerAttacked){
-	
+
 			Mainchoice = playermainmenu();  // Display main menu
-	
-			switch(Mainchoice){ 
-			
+
+			switch(Mainchoice){
+
 				case FALCON_PUNCH:  // Falcon Punch chosen
 					playerAttacked = TRUE;
 					use_falcon_punch();
 					break;
-			
+
 				case INVENTORY:  // Inventory chosen
-					Inventorychoice = playerinventorymenu();	
+					Inventorychoice = playerinventorymenu();
 					wrefresh(player_menu_win);  // Clean player inv menu from keep displaying.
-					switch(Inventorychoice){  
+					switch(Inventorychoice){
 						case TICKET:
 							use_ticket();
 							break;
@@ -91,7 +91,7 @@ void mainloop()
 							break;
 					}
 					break;
-				
+
 				case SHOP:  // Shop chosen
 					playershopmenu();  // Display shop menu
 					break;
@@ -99,32 +99,45 @@ void mainloop()
 				case QUIT:
 					return;
 
-			} // switch	
-			
+			} // switch
+
 			box(player_menu_win, 0, 0);
 			wrefresh(player_menu_win);
-			
+
 		} // Player turn loop
-		
-		
+
+
 		// *** CPU turn ***
-		
+
 		if(cpustats.energy < 1)  // Player game over
 			gameover(CPU);
-		else{ // CPU good to go. 
+		else{ // CPU good to go.
 			textevent("CPU turn.");
 			cpuAttacked = FALSE;
-			while(!cpuAttacked)	
+			char ch;
+			nodelay(stdscr, TRUE); // Don't stop by getch().
+			while(!cpuAttacked){
 				cpuAttacked = cpu_ai();
-		}	
-		
+				ch=getch();
+				switch(ch){
+					case 27:
+						return;
+					case 70:  // F
+					case 102: // f
+						toggle_fast_mode();  // Toggle CPU fast mode.
+						break;
+				}
+			}
+			nodelay(stdscr, FALSE);  // Switch to standard mode again.
+		}
+
 	} // Loop while quit isn't chosen.
-} 
+}
 
 
 int getRndNum(const int nmbOfTurnouts)  // Function to return a random number.
-{       
-	int rand_nbr = (rand()%nmbOfTurnouts+1); 
+{
+	int rand_nbr = (rand()%nmbOfTurnouts+1);
 	return rand_nbr;
 }
 

@@ -28,7 +28,7 @@ int main()
 
 	// Call game engine.
 	mainloop();
-	
+
 	// Main loop exited - quit.
 	endwin();
 	printf("\n Player exited. Thanks for playing.\n\n");

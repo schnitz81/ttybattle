@@ -13,66 +13,66 @@ int cpu_ai()  // CPU choicemaking.
 {
 	int attackMade = FALSE;
 	cpu_pause();
-	
+
 	// Main CPU logic
-	
+
 	if(cpustats.stunned>0){ 	// Check if stunned.
 		textevent("CPU is stunned.");
 		cpustats.stunned--;
 		cpu_pause();
 		attackMade = TRUE;  // True since being stunned is counted as an attack turn.
 	}
-	
+
 	else if(cpustats.ticket > 0)  // If there's a lottery ticket in the inventory, open it.
 		attackMade = cpuuse(TICKET);
-		
+
 	else if(cpustats.dosh >= HBOMB_PRICE) // Enough dosh for Hbomb - buy.
 		cpubuy(HBOMB);
-		
+
 	else if(cpustats.hbomb > 0)  // Use H-bomb if owned.
 		attackMade = cpuuse(HBOMB);
-	
+
 	else if(cpustats.dosh >= TICKET_PRICE && getRndNum(3)==1)  // Decide if buying lottery ticket.
 		cpubuy(TICKET);
-	
+
 	else if(cpustats.empbomb > 0 && playerstats.stunned==0)  // Use EMP bomb if player isn't already stunned.
 		attackMade = cpuuse(EMP_BOMB);
-		
+
 	else if(cpustats.dosh >= EMPBOMB_PRICE && getRndNum(2)==1 && playerstats.stunned==0)  // Buy EMP bomb by 50% chance if player isn't stunned.
 		cpubuy(EMP_BOMB);
-	
+
 	else if(cpustats.missile > 0)
 		attackMade = cpuuse(MISSILE);
-		
-	else if(cpustats.dosh >= MISSILE_PRICE) 
+
+	else if(cpustats.dosh >= MISSILE_PRICE)
 		cpubuy(MISSILE);
-	
+
 	else if(cpustats.panzerfaust > 0)
 		attackMade = cpuuse(PANZERFAUST);
-	
-	else if(cpustats.dosh >= PANZERFAUST_PRICE) 	
+
+	else if(cpustats.dosh >= PANZERFAUST_PRICE)
 		cpubuy(PANZERFAUST);
-		
-	else if(cpustats.dosh >= TICKET_PRICE && cpustats.dosh >= (TICKET_PRICE + HANDGRENADE_PRICE)) 
+
+	else if(cpustats.dosh >= TICKET_PRICE && cpustats.dosh >= (TICKET_PRICE + HANDGRENADE_PRICE))
 		cpubuy(TICKET);  // Always buy ticket if a last hand grenade can be afforded too.
-	
-	else if(cpustats.dosh >= TICKET_PRICE && getRndNum(2)==1) 
-		cpubuy(TICKET);  // 50% chance to buy ticket even if nothing more will be afforded. 
-						 
+
+	else if(cpustats.dosh >= TICKET_PRICE && getRndNum(2)==1)
+		cpubuy(TICKET);  // 50% chance to buy ticket even if nothing more will be afforded.
+
 	else if(cpustats.hand_grenade > 0)
 		attackMade = cpuuse(HAND_GRENADE);
-		
+
 	else if(cpustats.dosh >= HANDGRENADE_PRICE)
 		cpubuy(HAND_GRENADE);
-	
+
 	else 									// Last outpost - punch.
 		attackMade = cpupunch();
-	
-	// Return a report on if attack was made to gameengine.
+
+	// Return a report whether attack was made to gameengine.
 	if(attackMade)
 		return TRUE;
 	else
-		return FALSE;	
+		return FALSE;
 }
 
 
@@ -134,7 +134,7 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 				cpu_pause();
 			}
 			return FALSE;
-			
+
 		case HAND_GRENADE:
 			cpu_mainmenu(INVENTORY);
 			cpu_inventorymenu(HAND_GRENADE);
@@ -196,7 +196,7 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 				cpu_pause();
 			}
 			return TRUE;
-			
+
 		case MISSILE:
 			cpu_mainmenu(INVENTORY);
 			cpu_inventorymenu(MISSILE);
@@ -226,8 +226,8 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 				subtract_energy(PLAYER, hitpoints);
 				cpu_pause();
 			}
-			return TRUE;			
-		
+			return TRUE;
+
 		case EMP_BOMB:
 			cpu_mainmenu(INVENTORY);
 			cpu_inventorymenu(EMP_BOMB);
@@ -258,7 +258,7 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 				cpu_pause();
 			}
 			return TRUE;
-			
+
 		case HBOMB:
 			cpu_mainmenu(INVENTORY);
 			cpu_inventorymenu(HBOMB);
@@ -289,10 +289,10 @@ int cpuuse(const enum stuff Item)  // CPU use selected item.
 				cpu_pause();
 			}
 			return TRUE;
-		
+
 		default:
 			return FALSE;
-		
+
 	}
 }
 
@@ -362,7 +362,7 @@ void cpu_mainmenu(const enum mainchoice Mainchoice)  // CPU choose selected main
 			mvwchgat(cpu_menu_win,5,16,9,A_STANDOUT,0,NULL);
 			break;
 		case SHOP:
-			mvwchgat(cpu_menu_win,5,30,4,A_STANDOUT,0,NULL);		
+			mvwchgat(cpu_menu_win,5,30,4,A_STANDOUT,0,NULL);
 			break;
 		case QUIT:
 			break;
@@ -411,7 +411,7 @@ void cpu_inventorymenu(const enum stuff InventoryChoice)  // CPU use selected in
 	wrefresh(cpu_menu_win);
 	cpu_pause();
 	clear_cpuwindow();  // Erase all CPU menu items.
-	
+
 }
 
 
@@ -430,7 +430,7 @@ void cpu_shopmenu(const enum stuff ShopChoice)  // CPU buy selected shop item.
 	cpu_pause();
 	switch(ShopChoice){  // Highlight choice.
 		case TICKET:
-			mvwchgat(cpu_menu_win,3,2,14,A_STANDOUT,0,NULL);  
+			mvwchgat(cpu_menu_win,3,2,14,A_STANDOUT,0,NULL);
 			break;
 		case HAND_GRENADE:
 			mvwchgat(cpu_menu_win,4,2,12,A_STANDOUT,0,NULL);

@@ -51,19 +51,19 @@ void checkTerminalSize()
 		endwin();
 		printf("\nTerminal window too small! Please enlarge.\n\n");
 		exit(1);
-	}		
+	}
 }
 
 void cpuwindow()
 {
 	// Create CPU window
 	cpu_menu_win = newwin( 12, 50, 0, 4);
-	
+
 	print_cpu_titlebar();
-	
-	// Print a border around the cpu window and print a title 
+
+	// Print a border around the cpu window and print a title
 	box(cpu_menu_win, 0, 0);
-	
+
 	if(cpustats.fastmode){  // Print fast indicator if fast mode is set.
 		mvwprintw(cpu_menu_win,1,44,"fast");
 		mvwchgat(cpu_menu_win,1,44,4,A_BOLD,5,NULL);
@@ -77,21 +77,21 @@ enum mainchoice playermainmenu()
 {
 	ITEM **main_items;
 	MENU *main_menu;
-    
+
 	int c, n_choices, i;
-    
+
 	// Create menu items
 	n_choices = ARRAY_SIZE(main_choices);
 	main_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
 	for(i = 0; i < n_choices; ++i)
 		main_items[i] = new_item(main_choices[i], main_choices[i]);
-	
+
 	// Create menu
 	main_menu = new_menu((ITEM **)main_items);
-	
+
 	// Set menu option not to show the description
 	menu_opts_off(main_menu, O_SHOWDESC);
-	
+
 	// Create player window
 	player_menu_win = newwin(12, 50, 13, 4);
 	keypad(player_menu_win, TRUE);
@@ -101,23 +101,23 @@ enum mainchoice playermainmenu()
 	set_menu_sub(main_menu, derwin(player_menu_win, 7, 48, 5, 1));
 	set_menu_format(main_menu, 25, 25);
 	set_menu_mark(main_menu, " ");
-	
+
 	// Print a border around the player window
 	box(player_menu_win, 0, 0);
-      
+
 	// Print dosh, title and energy.
 	print_player_titlebar(player_menu_win);
-    
+
 	refresh();
-    
+
 	// Post the menu
 	post_menu(main_menu);
 	wrefresh(player_menu_win);
-	
+
 	int main_menu_choice = 99;
-	
-	while((c = wgetch(player_menu_win)) != 27){       
-		switch(c){	
+
+	while((c = wgetch(player_menu_win)) != 27){
+		switch(c){
 			case KEY_DOWN:
 				menu_driver(main_menu, REQ_DOWN_ITEM);
 				break;
@@ -141,7 +141,7 @@ enum mainchoice playermainmenu()
        	wrefresh(player_menu_win);
        	if(main_menu_choice != 99)  // Exit menu instantly when choice is made.
 		break;
-	}	
+	}
 	// Unpost and free memory
 	unpost_menu(main_menu);
 	free_menu(main_menu);
@@ -157,20 +157,20 @@ enum mainchoice playerinventorymenu()
 	MENU *inventory_menu;
 	int c, n_choices, i;
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
-    
+
 	// Create menu items
 	n_choices = ARRAY_SIZE(inventory_choices);
 	inventory_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
 	for(i = 0; i < n_choices; ++i){
 		inventory_items[i] = new_item(inventory_choices[i], inventory_choices[i] );
 	}
-	
+
 	// Create menu
 	inventory_menu = new_menu((ITEM **)inventory_items);
-	
+
 	// Set menu option not to show the description
 	menu_opts_off(inventory_menu, O_SHOWDESC);
-	
+
 	// Create player window
 	player_menu_win = newwin(12, 50, 13, 4);
 	keypad(player_menu_win, TRUE);
@@ -180,25 +180,25 @@ enum mainchoice playerinventorymenu()
 	set_menu_sub(inventory_menu, derwin(player_menu_win, 7, 48, 3, 1));
 	set_menu_format(inventory_menu, 25, 1);
 	set_menu_mark(inventory_menu, " ");
-	
+
 	// Print a border around the player window
 	box(player_menu_win, 0, 0);
-    
+
 	// Print dosh, title and energy.
 	print_player_titlebar(player_menu_win);
-    
+
 	refresh();
-    
+
 	// Post the menu
 	post_menu(inventory_menu);
 	print_player_stocks();
 	mvwprintw(player_menu_win,5, 38, "INVENTORY");
 	wrefresh(player_menu_win);
-	
+
 	int inventory_menu_choice = 99;
-	
-	while((c = wgetch(player_menu_win)) != 27 && inventory_menu_choice == 99){    
-		switch(c){	
+
+	while((c = wgetch(player_menu_win)) != 27 && inventory_menu_choice == 99){
+		switch(c){
 			case KEY_DOWN:
 				menu_driver(inventory_menu, REQ_DOWN_ITEM);
 			 	break;
@@ -226,7 +226,7 @@ enum mainchoice playerinventorymenu()
         wrefresh(player_menu_win);
         if(inventory_menu_choice != 99)  // Exit menu instantly when choice is made.
 		break;
-	}	
+	}
 	// Unpost and free memory
 	unpost_menu(inventory_menu);
 	free_menu(inventory_menu);
@@ -243,20 +243,20 @@ void playershopmenu()
 	MENU *shop_menu;
 	int c, n_choices, i;
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
-    
+
 	// Create menu items
 	n_choices = ARRAY_SIZE(shop_choices);
 	shop_items = (ITEM **)calloc(n_choices, sizeof(ITEM *));
-   
+
 	for(i = 0; i < n_choices; ++i)
 		shop_items[i] = new_item(shop_choices[i], shop_choices[i] );
-		
+
 	// Create menu
 	shop_menu = new_menu((ITEM **)shop_items);
-	
+
 	// Set menu option not to show the description
 	menu_opts_off(shop_menu, O_SHOWDESC);
-	
+
 	// Create player window
 	player_menu_win = newwin(12, 50, 13, 4);
 	keypad(player_menu_win, TRUE);
@@ -266,23 +266,23 @@ void playershopmenu()
 	set_menu_sub(shop_menu, derwin(player_menu_win, 7, 48, 3, 1));
 	set_menu_format(shop_menu, 25, 1);
 	set_menu_mark(shop_menu, " ");
-	
+
 	// Print a border around the player window
 	box(player_menu_win, 0, 0);
 
 	// Print dosh, title and energy.
 	print_player_titlebar(player_menu_win);
-    
+
 	refresh();
-    
+
 	// Post the menu
 	post_menu(shop_menu);
 	print_player_prices();
 	mvwprintw(player_menu_win,5, 41, "SHOP");
 	wrefresh(player_menu_win);
-	
-	while((c = wgetch(player_menu_win)) != 27 && Shopchoice != EXIT){       
-		switch(c){	
+
+	while((c = wgetch(player_menu_win)) != 27 && Shopchoice != EXIT){
+		switch(c){
 			case KEY_DOWN:
 				menu_driver(shop_menu, REQ_DOWN_ITEM);
 				break;
@@ -297,8 +297,8 @@ void playershopmenu()
 				break;
 			case 10:  // Enter
 				Shopchoice = item_index(current_item(shop_menu));
-				
-				switch(Shopchoice){  
+
+				switch(Shopchoice){
 					case TICKET:
 						buy_ticket(shop_menu);
 						break;
@@ -328,7 +328,7 @@ void playershopmenu()
 		wrefresh(player_menu_win);
 		if(Shopchoice == EXIT)  // Exit menu instantly when choice is made.
 			break;
-	}	
+	}
 	// Unpost and free memory
 	unpost_menu(shop_menu);
 	free_menu(shop_menu);

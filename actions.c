@@ -47,7 +47,7 @@ void use_ticket()
 		playerstats.ticket--;
 		textevent("Player opened lottery ticket.");
 		usleep(800000);
-		
+
 		// Generate ticket result
 		if(getRndNum(4) == 3){
 			winningAmount = getRndNum(MAXIMUM_WIN);
@@ -136,7 +136,7 @@ int use_panzerfaust()
 		}
 		return TRUE;
 	}
-	
+
 }
 
 int use_missile()
@@ -268,7 +268,7 @@ void buy_ticket(MENU *shop_menu)
 		playerstats.ticket++;
 		subtract_dosh(PLAYER, TICKET_PRICE);
 	}
-	
+
 }
 
 void buy_handgrenade(MENU *shop_menu)
@@ -363,7 +363,7 @@ void initialize_stats()
 	playerstats.hbomb = 0;
 	playerstats.stunned = 0;
 	playerstats.fastmode = 0;
-	
+
 	cpustats.dosh = 10000;
 	cpustats.energy = 1000;
 	cpustats.ticket = 0;
@@ -383,11 +383,11 @@ void add_dosh(const enum player Player, const int nbrToAdd)
 		sleeptime = 3000;
 	else if(nbrToAdd<6000)
 		sleeptime = 600;
-	else 
+	else
 		sleeptime = 200;
-	
+
 	switch(Player){
-		case PLAYER:			
+		case PLAYER:
 			for(i=1;i<=nbrToAdd;++i){
 				playerstats.dosh++;
 				mvwprintw(player_menu_win,1, 2, "$:%d  ",playerstats.dosh);
@@ -398,8 +398,8 @@ void add_dosh(const enum player Player, const int nbrToAdd)
 			print_player_titlebar();
 			wrefresh(player_menu_win);
 		break;
-	
-		case CPU:			
+
+		case CPU:
 			for(i=1;i<=nbrToAdd;++i){
 				cpustats.dosh++;
 				mvwprintw(cpu_menu_win,10, 2, "$:%d  ",cpustats.dosh);
@@ -420,27 +420,27 @@ void subtract_dosh(const enum player Player, const int nbrToSubtract)
 		sleeptime = 3000;
 	else if(nbrToSubtract<6000)
 		sleeptime = 600;
-	else 
+	else
 		sleeptime = 200;
 	switch(Player){
-		case PLAYER:		
+		case PLAYER:
 			for(i=nbrToSubtract;i>=1;--i){
 				playerstats.dosh--;
 				mvwprintw(player_menu_win,1, 2, "$:%d  ",playerstats.dosh);
 				mvwchgat(player_menu_win,1,2,7,A_BOLD,2,NULL);
 				wrefresh(player_menu_win);
-				usleep(sleeptime);	
+				usleep(sleeptime);
 			}
 			print_player_titlebar();
 			wrefresh(player_menu_win);
 			break;
-		case CPU:	
+		case CPU:
 			for(i=nbrToSubtract;i>=1;--i){
 				cpustats.dosh--;
 				mvwprintw(cpu_menu_win,10, 2, "$:%d  ",cpustats.dosh);
 				mvwchgat(cpu_menu_win,10,2,7,A_BOLD,2,NULL);
 				wrefresh(cpu_menu_win);
-				usleep(sleeptime);	
+				usleep(sleeptime);
 			}
 			print_cpu_titlebar();
 			wrefresh(cpu_menu_win);
@@ -455,11 +455,11 @@ void subtract_energy(const enum player Player, const int nbrToSubtract)
 		sleeptime = 8000;
 	if(nbrToSubtract<500)
 		sleeptime = 5000;
-	else 
+	else
 		sleeptime = 2500;
 
 	switch(Player){
-		case PLAYER:		
+		case PLAYER:
 			for(i=nbrToSubtract;i>=1;--i){
 				playerstats.energy--;
 				mvwprintw(player_menu_win,1, 44, "%d ",playerstats.energy);
@@ -476,7 +476,7 @@ void subtract_energy(const enum player Player, const int nbrToSubtract)
 				mvwprintw(cpu_menu_win,10, 44, "%d ",cpustats.energy);
 				mvwchgat(cpu_menu_win,10,36,11,A_BOLD,2,NULL);
 				wrefresh(cpu_menu_win);
-				usleep(sleeptime);			
+				usleep(sleeptime);
 			}
 			print_cpu_titlebar();
 			wrefresh(cpu_menu_win);
