@@ -101,6 +101,7 @@ enum mainchoice playermainmenu()
 	set_menu_sub(main_menu, derwin(player_menu_win, 7, 48, 5, 1));
 	set_menu_format(main_menu, 25, 25);
 	set_menu_mark(main_menu, " ");
+	set_current_item(main_menu, main_items[1]);
 
 	// Print a border around the player window
 	box(player_menu_win, 0, 0);

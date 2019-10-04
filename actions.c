@@ -417,7 +417,7 @@ void subtract_dosh(const enum player Player, const int nbrToSubtract)
 {
 	int i,sleeptime;
 	if(nbrToSubtract<1100)  // Different speed depending on amount.
-		sleeptime = 3000;
+		sleeptime = 1200;
 	else if(nbrToSubtract<6000)
 		sleeptime = 600;
 	else
@@ -454,9 +454,9 @@ void subtract_energy(const enum player Player, const int nbrToSubtract)
 	if(nbrToSubtract<75)  // Different speed depending on amount.
 		sleeptime = 8000;
 	if(nbrToSubtract<500)
-		sleeptime = 5000;
+		sleeptime = 4000;
 	else
-		sleeptime = 2500;
+		sleeptime = 2000;
 
 	switch(Player){
 		case PLAYER:
