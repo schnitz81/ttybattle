@@ -337,7 +337,7 @@ void playershopmenu()
 		free_item(shop_items[i]);
 }
 
-void textevent(const char textToPrint[])  // General routine for messagebar printing.
+void textevent(char textToPrint[])  // General routine for messagebar printing.
 {
 	size_t i,len;
 	mvprintw(12,5,textToPrint);

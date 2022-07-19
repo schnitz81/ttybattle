@@ -13,7 +13,7 @@ void cpuwindow();
 enum mainchoice playermainmenu();
 enum mainchoice playerinventorymenu();
 void playershopmenu();
-void textevent(const char textToPrint[]);
+void textevent(char textToPrint[]);
 void print_player_titlebar();
 void print_player_stocks();
 void print_player_prices();
