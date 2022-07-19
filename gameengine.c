@@ -20,9 +20,9 @@ void mainloop()
 	init_pair(5, COLOR_GREEN, COLOR_BLACK);
 
 	//Create player stats
-	enum mainchoice Mainchoice;
+	enum mainchoice Mainchoice = INVENTORY;
 	enum stuff Inventorychoice;
-	int playerAttacked,cpuAttacked;
+	int playerAttacked, cpuAttacked;
 
 	// Randomness.
 	srand(time(NULL));
