@@ -14,15 +14,15 @@ if ! [ -e beings ]; then
 	fi
 	echo "success!"; sleep .4
 
-    echo "Proceeding to build executable..."; sleep .6
+	echo "Proceeding to build executable..."; sleep .6
 
 	echo 'Building...'
-	gcc -Wall -c main.c
-	gcc -Wall -c actions.c
-	gcc -Wall -c cpu.c
-	gcc -Wall -c gameengine.c
-	gcc -Wall -c menus.c
-	gcc -o ttybattle main.o actions.o cpu.o gameengine.o menus.o -lcurses -lmenu
+	gcc -Wall -c main.c &&
+	gcc -Wall -c actions.c &&
+	gcc -Wall -c cpu.c &&
+	gcc -Wall -c gameengine.c &&
+	gcc -Wall -c menus.c &&
+	gcc -o ttybattle main.o actions.o cpu.o gameengine.o menus.o -lcurses -lmenu &&
 
 	if [ $? -eq 0 ]; then
 		echo "Build successful. Starting executable..."; sleep 1
