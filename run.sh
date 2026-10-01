@@ -29,7 +29,7 @@ if ! [ -e ttybattle ]; then
 	gcc -Wall -c cpu.c &&
 	gcc -Wall -c gameengine.c &&
 	gcc -Wall -c menus.c &&
-	gcc -o ttybattle main.o actions.o cpu.o gameengine.o menus.o -lcurses -lmenu &&
+	gcc -o ttybattle main.o actions.o cpu.o gameengine.o menus.o -lncurses -ltinfo -lmenu &&
 
 	if [ $? -eq 0 ]; then
 		echo "Build successful. Starting executable..."
