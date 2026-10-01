@@ -107,7 +107,7 @@ enum mainchoice playermainmenu()
 	box(player_menu_win, 0, 0);
 
 	// Print dosh, title and energy.
-	print_player_titlebar(player_menu_win);
+	print_player_titlebar();
 
 	refresh();
 
@@ -186,7 +186,7 @@ enum mainchoice playerinventorymenu()
 	box(player_menu_win, 0, 0);
 
 	// Print dosh, title and energy.
-	print_player_titlebar(player_menu_win);
+	print_player_titlebar();
 
 	refresh();
 
@@ -272,7 +272,7 @@ void playershopmenu()
 	box(player_menu_win, 0, 0);
 
 	// Print dosh, title and energy.
-	print_player_titlebar(player_menu_win);
+	print_player_titlebar();
 
 	refresh();
 
