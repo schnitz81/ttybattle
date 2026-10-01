@@ -340,7 +340,7 @@ void playershopmenu()
 void textevent(const char textToPrint[])  // General routine for messagebar printing.
 {
 	size_t i,len;
-	mvprintw(12,5,textToPrint);
+	mvprintw(12,5,"%s",textToPrint);
 	len = sizeof(&textToPrint) / sizeof(textToPrint[0]);  // Get length of char array.
 	for(i=0;i<50-len;i++)  // Blank any old message.
 		printw(" ");
